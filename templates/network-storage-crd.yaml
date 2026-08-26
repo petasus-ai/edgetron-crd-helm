@@ -1,0 +1,73 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: networkstorages.kubevirt.io
+spec:
+  group: kubevirt.io
+  scope: Namespaced
+  names:
+    plural: networkstorages
+    singular: networkstorage
+    kind: NetworkStorage
+    listKind: NetworkStorageList
+    shortNames:
+      - nws
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: NetworkStorage is the Schema for the networkstorages API
+          properties:
+            spec:
+              type: object
+              description: NetworkStorageSpec defines the desired state of NetworkStorage
+              properties:
+                filesystem:
+                  type: string
+                  description: Filesystem type (e.g., ext4, xfs) to format the volume.
+                protocol:
+                  type: string
+                  description: Protocol used to access storage (e.g., NFS, iSCSI).
+                vendor:
+                  type: string
+                  description: Vendor of network storage
+                csi:
+                  type: string
+                  description: CSI name for network storage
+                transport:
+                  type: string
+                  description: Transport method for the protocol (e.g., TCP, RDMA).
+                fabric:
+                  type: string
+                  description: Storage fabric type (e.g., INFINIBAND, ETHERNET).
+                segmentId:
+                  type: string
+                  description: Segment identifier for ethernet typed fabric.
+                interface:
+                  type: integer
+                  description: Interface index number of attached fabric.
+                endpoint:
+                  type: string
+                  description: Network endpoint or path for connecting to the storage.
+                peers:
+                  type: array
+                  description: >-
+                    LNet peer NID groups for Multi-Rail storage servers.
+                    Each item is one server; comma-separated NIDs within an item
+                    belong to that server's rails. Optional; when absent, peers
+                    are derived from the endpoint field.
+                  items:
+                    type: string
+                maxConnection:
+                  type: integer
+                  description: Maximum concurrent connections allowed to this storage.
+                mountPoint:
+                  type: string
+                  description: Target directory path where the storage will be mounted.
+                mountOptions:
+                  type: string
+                  description: Additional mount options (comma-separated) to use.
+

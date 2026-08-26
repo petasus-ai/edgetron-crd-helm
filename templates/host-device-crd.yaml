@@ -1,0 +1,61 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: hostdevices.kubevirt.io
+spec:
+  group: kubevirt.io
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                gpuResource:
+                  description: If ture, the host device will be treated as GPU
+                  type: boolean
+                netResource:
+                  description: If ture, the host device will be treated as network 
+                               resource, such as NIC or HCA
+                  type: boolean
+                externalResourceProvider:
+                  description: If true, KubeVirt will leave the allocation
+                    and monitoring to an external device plugin
+                  type: boolean
+                pcieAffinity:
+                  description: PCIe-root alignment intent on the DRA path.
+                    "gpu" pairs each instance of this device with a flavor
+                    GPU behind the same PCIe root through a composite claim
+                    (e.g. NVMe for GPUDirect Storage); "none" (default)
+                    allocates it independently. Only meaningful together
+                    with externalResourceProvider.
+                  type: string
+                  enum: ["gpu", "none"]
+                pciVendorSelector:
+                  description: The vendor_id:product_id tupple of the PCI device
+                  type: string
+                resourceName:
+                  description: The name of the resource that is representing
+                               the device. Exposed by a device plugin and requested
+                               by VMs. Typically of the form vendor.com/product_nameThe
+                               name of the resource that is representing the device.
+                               Exposed by a device plugin and requested by VMs. Typically
+                               of the form vendor.com/product_name
+                  type: string
+                description:
+                  type: string
+              required:
+              - pciVendorSelector
+              - resourceName
+  scope: Cluster
+  names:
+    plural: hostdevices
+    singular: hostdevice
+    kind: HostDevice
+    shortNames:
+    - hd
+    - hds
