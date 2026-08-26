@@ -1,0 +1,33 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: vmmetadatas.kubevirt.io
+spec:
+  group: kubevirt.io
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                type:
+                  type: string
+                vendor:
+                  type: string
+  scope: Cluster
+  names:
+    plural: vmmetadatas
+    singular: vmmetadata
+    kind: VmMetadata
+    shortNames:
+    - vmm
+    - vmms

@@ -1,0 +1,2 @@
+# Edgetron Custom Resource Definition
+Edgetron is an abstraction layer used for provisioning virtual infrastructure in the purpose of hosting Kubernetes service. Edgetron exposes MM3 interface to MEPM OP for northbound, to southbound, it invokes standarized cluster-api to provision Kubernetes cluster. To provide OpenStack like operation, we added a set of custom resources into edgetron, and this helm chart helps to install all relevant CRDs along with examples.
