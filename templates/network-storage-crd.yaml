@@ -1,0 +1,49 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: networkstorages.kubevirt.io
+spec:
+  group: kubevirt.io
+  scope: Namespaced
+  names:
+    plural: networkstorages
+    singular: networkstorage
+    kind: NetworkStorage
+    listKind: NetworkStorageList
+    shortNames:
+      - nws
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: NetworkStorage is the Schema for the networkstorages API
+          properties:
+            spec:
+              type: object
+              description: NetworkStorageSpec defines the desired state of NetworkStorage
+              properties:
+                filesystem:
+                  type: string
+                  description: Filesystem type (e.g., ext4, xfs) to format the volume.
+                protocol:
+                  type: string
+                  description: Protocol used to access storage (e.g., NFS, iSCSI).
+                transport:
+                  type: string
+                  description: Transport method for the protocol (e.g., TCP, RDMA).
+                endpoint:
+                  type: string
+                  description: Network endpoint or path for connecting to the storage.
+                maxConnection:
+                  type: integer
+                  description: Maximum concurrent connections allowed to this storage.
+                mountPoint:
+                  type: string
+                  description: Target directory path where the storage will be mounted.
+                mountOptions:
+                  type: string
+                  description: Additional mount options (comma-separated) to use.
+
