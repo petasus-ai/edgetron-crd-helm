@@ -1,0 +1,31 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: securitygroups.kubevirt.io
+spec:
+  group: kubevirt.io
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                description:
+                  type: string
+  scope: Cluster
+  names:
+    plural: securitygroups
+    singular: securitygroup
+    kind: SecurityGroup
+    shortNames:
+    - sg
+    - sgs
