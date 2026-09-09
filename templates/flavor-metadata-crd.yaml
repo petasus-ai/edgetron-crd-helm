@@ -1,0 +1,49 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: flavormetadatas.kubevirt.io
+spec:
+  group: kubevirt.io
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - type
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                    - instance_type
+                families:
+                  type: array
+                  items:
+                    type: string
+      additionalPrinterColumns:
+        - name: Type
+          type: string
+          jsonPath: .spec.type
+        - name: Families
+          type: string
+          jsonPath: .spec.families
+        - name: Age
+          type: date
+          jsonPath: .metadata.creationTimestamp
+  scope: Cluster
+  names:
+    plural: flavormetadatas
+    singular: flavormetadata
+    kind: FlavorMetadata
+    shortNames:
+    - fvm
+    - fvms

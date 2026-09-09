@@ -17,6 +17,8 @@ spec:
               properties:
                 name:
                   type: string
+                family:
+                  type: string
                 description:
                   type: string
                 vcpus:
