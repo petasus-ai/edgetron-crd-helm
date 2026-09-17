@@ -27,15 +27,25 @@ spec:
                     - instance_type
                 families:
                   type: array
+                  x-kubernetes-list-type: map
+                  x-kubernetes-list-map-keys:
+                    - name
                   items:
-                    type: string
+                    type: object
+                    required:
+                      - name
+                    properties:
+                      name:
+                        type: string
+                      description:
+                        type: string
       additionalPrinterColumns:
         - name: Type
           type: string
           jsonPath: .spec.type
         - name: Families
           type: string
-          jsonPath: .spec.families
+          jsonPath: .spec.families[*].name
         - name: Age
           type: date
           jsonPath: .metadata.creationTimestamp
