@@ -19,12 +19,18 @@ spec:
               properties:
                 name:
                   type: string
+                displayName:
+                  type: string
                 description:
                   type: string
                 type:
                   type: string
                   enum:
                     - instance_type
+                accelerated:
+                  type: boolean
+                default:
+                  type: boolean
                 families:
                   type: array
                   x-kubernetes-list-type: map
@@ -39,6 +45,8 @@ spec:
                         type: string
                       description:
                         type: string
+                      default:
+                        type: boolean
       additionalPrinterColumns:
         - name: Type
           type: string
