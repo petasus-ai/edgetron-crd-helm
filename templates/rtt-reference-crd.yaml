@@ -21,13 +21,9 @@ spec:
               properties:
                 displayName:
                   type: object
-                  properties:
-                    en:
-                      type: string
-                    ko:
-                      type: string
-                    ja:
-                      type: string
+                  # by language code (en, ko, ja, zh, zh-TW, ...)
+                  additionalProperties:
+                    type: string
                 place:
                   type: object
                   properties:
@@ -35,22 +31,19 @@ spec:
                       type: string
                     name:
                       type: object
-                      properties:
-                        en:
-                          type: string
-                        ko:
-                          type: string
-                        ja:
-                          type: string
+                      # by language code (en, ko, ja, zh, zh-TW, ...)
+                      additionalProperties:
+                        type: string
                     admin1:
                       type: object
-                      properties:
-                        en:
-                          type: string
-                        ko:
-                          type: string
-                        ja:
-                          type: string
+                      # by language code (en, ko, ja, zh, zh-TW, ...)
+                      additionalProperties:
+                        type: string
+                    district:
+                      type: object
+                      # the levels between admin1 and the place (e.g. ko 성남시 분당구), by language
+                      additionalProperties:
+                        type: string
                     countryCode:
                       type: string
                 lat:
